@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 
+
 function mapStateToProps(state) {
   console.info(state)
   return {
@@ -15,7 +16,7 @@ function mapStateToProps(state) {
 class App extends Component {
   render() {
     return <div>
-      bye
+      hi
     </div>
   }
 }
