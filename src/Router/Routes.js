@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import { App, Login } from '../reactLoadable';
+import { App, Login, Meetups } from '../reactLoadable';
 import { connect } from 'react-redux'
 
 function mapStateToProps(state) {
@@ -24,6 +24,7 @@ class Routes extends Component {
         <Switch>
           <Route path="/" exact render={(props) => <App /> } />
           <Route path="/login" exact render={(props) => <Login />} />
+          <Route path="/meetups" exact render={(props) => <Meetups meetups={meetups} isFetching={isFetching} />} />
           <Route render={() => <Redirect to="/" />} />
         </Switch>
       </Router>
