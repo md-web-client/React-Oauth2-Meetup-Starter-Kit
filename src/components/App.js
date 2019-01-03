@@ -14,7 +14,9 @@ function mapStateToProps(state) {
 }
 
 class App extends Component {
+
   render() {
+    console.log(this.props.history)
     return <div>
       hi
     </div>

@@ -17,12 +17,12 @@ function mapStateToProps(state) {
 class Routes extends Component {
 
   render() {
-    const { meetups, meetup, route, isFetching } = this.props
-    console.log('hi', { meetups, meetup, route, isFetching })
+    const { meetups, isFetching } = this.props
+    
     return (
       <Router>
         <Switch>
-          <Route path="/" exact render={(props) => <App /> } />
+          <Route path="/" exact component={ App } />
           <Route path="/login" exact render={(props) => <Login />} />
           <Route path="/meetups" exact render={(props) => <Meetups meetups={meetups} isFetching={isFetching} />} />
           <Route render={() => <Redirect to="/" />} />

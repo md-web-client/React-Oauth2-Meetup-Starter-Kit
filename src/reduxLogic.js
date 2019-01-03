@@ -2,25 +2,6 @@ import { toHome, toMeetupDetails, loadData, saveSession, fetchMeetups } from './
 import { parseQs } from './lib/queryString'
 
 export const reduxLogic  = (store) => {
-    function handleHashRouting(event) {
-        try {
-        var [, path] = window.location.href.match(/#(.*)$/)
-        var [page, id] = path.split('/')
-        switch (page) {
-        case 'home':
-            return store.dispatch(toHome())
-        case 'show':
-            return store.dispatch(toMeetupDetails(id))
-        default:
-            console.log('should never be reached')
-        }
-        
-        } catch(e) {
-        console.log(e)
-        }
-    }
-
-    window.addEventListener('hashchange', handleHashRouting)
 
     const sessionExpiresAt = sessionStorage.getItem('sessionExpiresAt')
     const sessionAccessToken = sessionStorage.getItem('sessionAccessToken')
