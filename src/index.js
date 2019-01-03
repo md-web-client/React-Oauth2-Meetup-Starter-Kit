@@ -8,10 +8,9 @@ import { createLogger } from 'redux-logger'
 
 import { reduxLogic } from './reduxLogic';
 
-// import NestedRoutes from './NestedRoutes'
+// import NestedRoutes from './Router/NestedRoutes'
 import { Provider } from 'react-redux'
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import { App } from './reactLoadable';
+import Router from './Router/Routes'
 
 import * as serviceWorker from './serviceWorker';
 
@@ -26,12 +25,7 @@ reduxLogic(store)
 
 ReactDom.render(
   <Provider store={store}>
-    <Router >
-      <Switch>
-        <Route path="/" exact render={(props) => <App /> } />
-        <Route render={() => <Redirect to="/" />} />
-      </Switch>
-    </Router >
+    <Router/>
   </Provider>,
   document.querySelector('#root')
 )
