@@ -1,5 +1,4 @@
-import { REQUEST_MEETUPS, RECEIVE_MEETUPS, TO_HOME, TO_MEETUP_DETAILS,
-    TO_LOGIN, SAVE_SESSION, LOAD_DATA, toHome, toMeetupDetails, loadData, saveSession, fetchMeetups } from './actions'
+import { toHome, toMeetupDetails, loadData, saveSession, fetchMeetups } from './actions'
 import { parseQs } from './lib/queryString'
 
 export const reduxLogic  = (store) => {
@@ -12,7 +11,10 @@ export const reduxLogic  = (store) => {
             return store.dispatch(toHome())
         case 'show':
             return store.dispatch(toMeetupDetails(id))
+        default:
+            console.log('should never be reached')
         }
+        
         } catch(e) {
         console.log(e)
         }

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { parseQs } from './lib/queryString'
+// import { parseQs } from './lib/queryString'
 
 export const REQUEST_MEETUPS = 'REQUEST_MEETUPS'
 export const RECEIVE_MEETUPS = 'RECEIVE_MEETUPS'

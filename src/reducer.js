@@ -1,4 +1,4 @@
-import { filter, find, propEq } from 'ramda'
+import { find, propEq /* filter */ } from 'ramda'
 import { REQUEST_MEETUPS, RECEIVE_MEETUPS, TO_HOME, TO_MEETUP_DETAILS, 
   TO_LOGIN, SAVE_SESSION, LOAD_DATA } from './actions'
 
