@@ -1,9 +1,5 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import * as serviceWorker from './serviceWorker';
-
-import App from './App'
-import { Provider } from 'react-redux'
 
 import { createStore, applyMiddleware } from 'redux'
 import reducer from './reducer'
@@ -11,6 +7,11 @@ import thunkMiddleware from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 
 import { reduxLogic } from './reduxLogic';
+
+import App from './App'
+import { Provider } from 'react-redux'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import * as serviceWorker from './serviceWorker';
 
 const store = createStore(
   reducer,
@@ -23,9 +24,12 @@ reduxLogic(store)
 
 ReactDom.render(
   <Provider store={store}>
-    <div>
-      hi
-    </div>
+    <Router >
+      <nav>
+        <Route exact path="/" render={(props) => <App props={props} /> } />
+        <Route path="/" render={() => <Redirect to="/" />} />
+      </nav>
+    </Router>
   </Provider>,
   document.querySelector('#root')
 )
