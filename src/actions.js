@@ -26,6 +26,13 @@ export function shouldRenewToken(state, timeNow) {
   return timeNow > state.session.expiresAt ? true : false
 }
 
+export function toMeetupDetails(id) {
+  return {
+    type: TO_MEETUP_DETAILS,
+    id: id
+  }
+}
+
 export function requestMeetups() {
   return { type: REQUEST_MEETUPS }
 }
@@ -38,12 +45,14 @@ export function receivedMeetups(json) {
 }
 
 export function fetchMeetups(token, history) {
+
   return (dispatch, getState) => {
     const timeNow = new Date() / 1000 // in seconds
     if (shouldRenewToken(getState(), timeNow)) {
       console.info('need to renew token')
       history.push('login')
     } else {
+
       console.info('token still good')
       dispatch(requestMeetups())
       history.push('meetups')
