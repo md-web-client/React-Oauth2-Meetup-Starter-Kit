@@ -44,6 +44,32 @@ export function receivedMeetups(json) {
   }
 }
 
+export function rsvpMe(token, history){ // pass history into this prop. match etc.
+  
+  return (dispatch, getState) => {
+    const timeNow = new Date() / 1000; // in seconds
+    if (shouldRenewToken(getState(), timeNow)) {
+      console.info('need to renew token');
+      history.push('login');
+    } else {
+      console.info('token still good');
+      /* Values not used in axios post request. but may need to be used one day: crossDomain: true,data: {  }, */
+      const config = {
+        method: 'POST',
+        url: 'https://api.meetup.com/2/rsvp',
+        params: {
+          rsvp:'no', event_id: 'gqnjlqyxqbdc',
+          access_token: token,
+        }
+      };
+      return axios(config)
+      .catch(err => { console.log(err) })
+      .then(res => { console.log(res) });
+
+    }
+  }
+}
+
 export function fetchMeetups(token, history) {
 
   return (dispatch, getState) => {
