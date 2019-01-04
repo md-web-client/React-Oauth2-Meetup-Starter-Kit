@@ -26,46 +26,27 @@ export function shouldRenewToken(state, timeNow) {
   return timeNow > state.session.expiresAt ? true : false
 }
 
-export function toLogin() {
-  return { type: TO_LOGIN }
-}
-
-export function toMeetupDetails(id) {
-  return {
-    type: TO_MEETUP_DETAILS,
-    id: id
-  }
-}
-
-export function toHome() {
-  return {
-    type: TO_HOME
-  }
-}
-
 export function requestMeetups() {
   return { type: REQUEST_MEETUPS }
 }
 
 export function receivedMeetups(json) {
-  return { 
+  return {
     type: RECEIVE_MEETUPS,
-    meetups: json 
+    meetups: json
   }
 }
 
-export function fetchMeetups(token) {
-  
+export function fetchMeetups(token, history) {
   return (dispatch, getState) => {
-    const timeNow = new Date() / 1000 // in seconds  
+    const timeNow = new Date() / 1000 // in seconds
     if (shouldRenewToken(getState(), timeNow)) {
       console.info('need to renew token')
-      dispatch(toLogin())
+      history.push('login')
     } else {
       console.info('token still good')
       dispatch(requestMeetups())
-      dispatch(toHome())
-      window.location.hash = 'home'
+      history.push('meetups')
 
       const config = {
         url: 'https://api.meetup.com/self/events',
@@ -78,7 +59,7 @@ export function fetchMeetups(token) {
       return axios(config)
         .catch(err => {
           // window.location = ''
-          dispatch(toLogin()) // temporary hack to reset app when request fail due to meetup only allowing cors with valid token
+          history.push('login') // temporary hack to reset app when request fail due to meetup only allowing cors with valid token
         })
         .then(res => {
           return dispatch(receivedMeetups(res.data))

@@ -1,5 +1,5 @@
 import { find, propEq /* filter */ } from 'ramda'
-import { REQUEST_MEETUPS, RECEIVE_MEETUPS, TO_HOME, TO_MEETUP_DETAILS, 
+import { REQUEST_MEETUPS, RECEIVE_MEETUPS, TO_HOME, TO_MEETUP_DETAILS,
   TO_LOGIN, SAVE_SESSION, LOAD_DATA } from './actions'
 
 const initState = {
@@ -47,25 +47,25 @@ const reducer = (state = initState, action) => {
       }
     })
   case TO_HOME:
-    return Object.assign({}, state, { 
-      route: { view: 'home' } 
+    return Object.assign({}, state, {
+      route: { view: 'home' }
     })
   case TO_MEETUP_DETAILS:
     return Object.assign({}, state, {
-      route: { 
-        view: 'show', 
-        id: action.id 
+      route: {
+        view: 'show',
+        id: action.id
       },
       meetup: find(propEq('id', action.id), state.meetups)
     })
   case REQUEST_MEETUPS:
     return Object.assign({}, state, { isFetching: true })
   case RECEIVE_MEETUPS:
-    return Object.assign({}, state, { 
-      isFetching: false , 
-      meetups: action.meetups 
+    return Object.assign({}, state, {
+      isFetching: false ,
+      meetups: action.meetups
     })
-  default: 
+  default:
     return state
   }
 }

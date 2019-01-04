@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import { App, Login, Meetups } from '../reactLoadable';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { Login, Meetups } from '../reactLoadable';
 import { connect } from 'react-redux'
+import { checkOauth } from '../reduxLogic';
 
 function mapStateToProps(state) {
   console.info(state)
@@ -15,19 +16,25 @@ function mapStateToProps(state) {
 }
 
 class Routes extends Component {
+  constructor(props){
+    super(props);
+    this.checkOauth = checkOauth
+  }
+
+  componentDidMount() {
+    this.checkOauth(this.props)
+  }
 
   render() {
-    const { meetups, isFetching } = this.props
-    
+    const { meetups, isFetching, history} = this.props
+    console.log({history})
     return (
-      <Router>
         <Switch>
-          <Route path="/" exact component={ App } />
+          <Route path="/" exact component={ Login } />
           <Route path="/login" exact render={(props) => <Login />} />
           <Route path="/meetups" exact render={(props) => <Meetups meetups={meetups} isFetching={isFetching} />} />
           <Route render={() => <Redirect to="/" />} />
         </Switch>
-      </Router>
     )
   }
 }

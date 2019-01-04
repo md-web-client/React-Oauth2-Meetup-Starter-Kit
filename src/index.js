@@ -6,11 +6,10 @@ import reducer from './reducer'
 import thunkMiddleware from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 
-import { reduxLogic } from './reduxLogic';
-
 // import NestedRoutes from './Router/NestedRoutes'
 import { Provider } from 'react-redux'
-import Router from './Router/Routes'
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Routes from './Router/Routes'
 
 import * as serviceWorker from './serviceWorker';
 
@@ -21,11 +20,11 @@ const store = createStore(
   applyMiddleware(thunkMiddleware)
 )
 
-reduxLogic(store)
-
 ReactDom.render(
   <Provider store={store}>
-    <Router/>
+    <Router>
+      <Route path="/" component={ Routes } />
+    </Router>
   </Provider>,
   document.querySelector('#root')
 )

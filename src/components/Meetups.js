@@ -10,15 +10,15 @@ class Meetups extends Component {
 
     const content = meetups.map((meetup, index) => {
       return <div key={index}>
-        <button  >
-          <div>{meetup.name}</div>
-          <div>{moment(meetup.time).fromNow()}</div>
+        <button  style={{width:'100%'}}>
+          <div style={{textAlign:'left'}}>{meetup.name}</div>
+          <div style={{textAlign:'left'}}>{moment(meetup.time).fromNow()}</div>
         </button>
       </div>
     })
 
-    return <div>
-      <div>Upcoming</div>
+    return <div style={{textAlign:'center'}}>
+      <div>Listed below are the upcoming meetups!</div>
       {isFetching ? <div>"loading..."</div> : content}
     </div>
     }
